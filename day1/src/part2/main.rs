@@ -39,12 +39,26 @@ fn to_digit(buf: &[u8]) -> Option<u32> {
         })
 }
 
+#[derive(clap::Parser)]
+#[command(
+    author = "Martyrshot",
+    version = "1.0",
+    about = "Advent of Code day 1 part 2",
+    long_about = "Advent of Code solution for day 1 part 2"
+)]
+struct Args {
+    #[arg(long)]
+    input_path: String,
+}
+
 fn main() {
     let package_name = env!("CARGO_PKG_NAME");
     let binary_name = env!("CARGO_BIN_NAME");
-    println!("Starting solution for {package_name}: {binary_name}");
+    let args = <Args as clap::Parser>::parse();
+    let input_path = args.input_path;
+    println!("Starting solution for {package_name} {binary_name} using file: {input_path}");
 
-    let f = File::open("src/input.txt").expect("Failed to open file");
+    let f = File::open(input_path).expect("Failed to open file");
     let reader = BufReader::new(f);
 
     let mut sum = 0;
