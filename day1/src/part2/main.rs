@@ -68,24 +68,16 @@ fn main() {
         let bytes = line.as_bytes();
         let line_len = line.len();
         
-        let mut should_break = false;
         for i in 0..line_len {
-            if should_break {
-                break;
-            }
             if let Some(x) = to_digit(&bytes[i..]) {
                 sum += x * 10;
-                should_break = true;
-            }
-        }
-        should_break = false;
-        for i in (0..line_len).rev() {
-            if should_break {
                 break;
             }
+        }
+        for i in (0..line_len).rev() {
             if let Some(x) = to_digit(&bytes[i..]) {
                 sum += x;
-                should_break = true;
+                break;
             }
 
         }
