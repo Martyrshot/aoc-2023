@@ -46,8 +46,6 @@ fn main() {
     let reader = BufReader::new(f);
     let mut sum = 0;
     let mut tickets = HashMap::<usize, usize>::new();
-    // insert the first ticket
-    tickets.insert(0, 1);
     use std::io::BufRead;
     let mut max_cards = 0u64;
     for (i, l) in reader.lines().enumerate() {
