@@ -17,26 +17,22 @@ fn word_to_digit(s: &str) -> Option<u32> {
 }
 
 fn to_digit(buf: &[u8]) -> Option<u32> {
-    (buf[0] as char)
-        .to_digit(10)
-        .or_else(|| {
-            let max_length = 5;
-            for i in 2..(max_length+1) {
-                if i >= buf.len() {
-                    return None;
-                }
-                let r = std::str::from_utf8(&buf[0..i+1])
-                    .ok()
-                    .and_then(|s| {
-                        word_to_digit(s)
-                    });
-                if r.is_none() {
-                    continue;
-                }
-                return r;
+    (buf[0] as char).to_digit(10).or_else(|| {
+        let max_length = 5;
+        for i in 2..(max_length + 1) {
+            if i >= buf.len() {
+                return None;
             }
-            None
-        })
+            let r = std::str::from_utf8(&buf[0..i + 1])
+                .ok()
+                .and_then(|s| word_to_digit(s));
+            if r.is_none() {
+                continue;
+            }
+            return r;
+        }
+        None
+    })
 }
 
 #[derive(clap::Parser)]
@@ -67,7 +63,7 @@ fn main() {
         let line = l.expect("Failed to read line");
         let bytes = line.as_bytes();
         let line_len = line.len();
-        
+
         for i in 0..line_len {
             if let Some(x) = to_digit(&bytes[i..]) {
                 sum += x * 10;
@@ -79,7 +75,6 @@ fn main() {
                 sum += x;
                 break;
             }
-
         }
     }
     println!("Solution: {sum}");

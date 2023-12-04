@@ -13,12 +13,8 @@ struct Bag {
 impl Bag {
     fn min_cubes_power(&self, game: String) -> usize {
         let mut tmp = self.clone();
-        let game_pair = game
-            .split(": ")
-            .collect::<Vec<&str>>();
-        let groups = game_pair[1]
-            .split("; ")
-            .collect::<Vec<&str>>();
+        let game_pair = game.split(": ").collect::<Vec<&str>>();
+        let groups = game_pair[1].split("; ").collect::<Vec<&str>>();
 
         for group in groups {
             let reveals = group.split(", ").collect::<Vec<&str>>();

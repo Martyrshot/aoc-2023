@@ -10,17 +10,11 @@ struct Bag {
 impl Bag {
     fn is_valid_game(&self, game: String) -> (bool, usize) {
         let mut res = true;
-        let game_pair = game
-            .split(": ")
-            .collect::<Vec<&str>>();
-        let game_id = game_pair[0]
-            .split(' ')
-            .collect::<Vec<&str>>()[1]
+        let game_pair = game.split(": ").collect::<Vec<&str>>();
+        let game_id = game_pair[0].split(' ').collect::<Vec<&str>>()[1]
             .parse::<usize>()
             .expect("failed to parse game id");
-        let groups = game_pair[1]
-            .split("; ")
-            .collect::<Vec<&str>>();
+        let groups = game_pair[1].split("; ").collect::<Vec<&str>>();
 
         for group in groups {
             let reveals = group.split(", ").collect::<Vec<&str>>();
